@@ -2,7 +2,8 @@
 
 
 
-static int select_index = 0;
+static int select_index = 0; // 选择列表的index
+// 简单粗暴条目
 static lv_obj_t *list_title_1;
 static lv_obj_t *list_title_2;
 static lv_obj_t *list_title_3;
@@ -26,13 +27,15 @@ static lv_obj_t *list_title_20;
 static lv_obj_t *selected_frame;
 static lv_group_t *list_group;
 
+
+// 菜单结构体
 typedef struct
 {
-  lv_obj_t *list_item;
-  int x;
-  int y;
-  int selected;
-  char *title;
+  lv_obj_t *list_item; // lv_obj
+  int x; // 位置 x
+  int y; // 位置 y
+  int selected; // 是否focus 实际不需要使用
+  char *title; // 标题
 } list_item_state;
 
 int list_len = 20;
@@ -59,7 +62,7 @@ list_item_state list_item[20] = {
     {list_title_19, 10, 550, 0, "Title 19"},
     {list_title_20, 10, 580, 0, "Title 20"}};
 
-list_item_state selected_frame_state = {selected_frame, 0, 0, 1, "Selected Frame"};
+list_item_state selected_frame_state = {selected_frame, 0, 0, 1, "Selected Frame"}; // 多余的
 
 // void anim_ready_handler(lv_anim_t * a)
 // {
@@ -67,7 +70,7 @@ list_item_state selected_frame_state = {selected_frame, 0, 0, 1, "Selected Frame
 //   // printf("anim ready\n");
 // }
 
-void select_frame_anim(lv_obj_t *obj, int index)
+void select_frame_anim(lv_obj_t *obj, int index) // 菜单选择条动画
 {
   lv_anim_t a;
   lv_anim_init(&a);
@@ -91,7 +94,7 @@ void select_frame_anim(lv_obj_t *obj, int index)
   lv_anim_start(&anim_width);
 }
 
-void select_cb(lv_event_t *e)
+void select_cb(lv_event_t *e) // 点击屏幕时间回调
 {
   select_index++;
   if (select_index > list_len - 1)
@@ -109,7 +112,7 @@ void select_cb(lv_event_t *e)
   }
 }
 
-void load_animation()
+void load_animation() // 屏幕加载动画入场
 {
   lv_anim_t select_anim_load;
   lv_anim_init(&select_anim_load);
